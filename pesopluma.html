@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peso Pluma Oficial Fan Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Añadir scroll suave para los enlaces internos */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --color-primary: #333;
+            --color-gold: #FFD700; /* Color Dorado */
+            --color-light: #f4f4f4;
+            --color-dark: #1a1a1a; /* Un oscuro un poco más profundo */
+            --color-text-light: #fff;
+            --color-accent: #e94e36; /* Un acento naranja-rojizo, si se usa */
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-dark);
+            color: var(--color-text-light);
+            position: relative;
+            z-index: 0;
+            overflow-x: hidden; /* Prevenir scroll horizontal por animaciones */
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image_6448a7.png'); /* TU IMAGEN DE FONDO AQUÍ */
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: grayscale(75%) blur(12px); /* Aumento ligero de gris y desenfoque */
+            opacity: 0.07; /* Muy sutil */
+            z-index: -2;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(20, 20, 20, 0.25); /* Capa sutil sobre el fondo */
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.75); /* Más oscuro y un poco más transparente */
+            color: var(--color-text-light);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6); /* Sombra más pronunciada */
+            position: sticky; /* Header fijo al hacer scroll */
+            top: 0;
+            z-index: 1000; /* Asegurar que esté sobre otros elementos */
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-gold);
+            letter-spacing: 3.5px; /* Un poco más de espaciado */
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            font-size: 2.8em; /* Ligeramente más grande */
+            transition: transform var(--transition-speed) ease-out;
+        }
+        header h1:hover {
+            transform: scale(1.03); /* Efecto sutil al pasar el mouse */
+        }
+
+        header p {
+            margin-top: 5px;
+            font-size: 1.15em; /* Un poco más grande */
+            opacity: 0.9;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 18px; /* Más espaciado */
+        }
+
+        nav ul li a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05em; /* Ligeramente más grande */
+            transition: color var(--transition-speed) ease-in-out, text-shadow var(--transition-speed) ease;
+            position: relative;
+            padding-bottom: 8px; /* Más espacio para la línea */
+        }
+
+        nav ul li a:hover {
+            color: var(--color-gold);
+            text-shadow: 0 0 10px var(--color-gold); /* Brillo dorado al pasar el mouse */
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px; /* Línea más gruesa */
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Centrar la línea */
+            background-color: var(--color-gold);
+            transition: width var(--transition-speed) ease-in-out;
+            border-radius: 2px;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px; /* Un poco más ancho */
+            margin: auto;
+            overflow: hidden; /* Mantenido, pero revisar si causa problemas con animaciones */
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 50px 20px; /* Más padding vertical y horizontal uniforme */
+            background-color: rgba(255, 255, 255, 0.98); /* Blanco casi sólido, muy leve transparencia */
+            color: var(--color-primary);
+            margin: 30px auto; /* Margen arriba/abajo y centrado */
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35); /* Sombra más difusa y grande */
+            text-align: center;
+            opacity: 0; /* Para animación de entrada */
+            transform: translateY(30px); /* Para animación de entrada */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible { /* Clase para activar animación al scrollear */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        section:last-of-type { /* Usar last-of-type para ser más específico */
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        section h2 {
+            text-align: center;
+            color: var(--color-dark);
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5em; /* Títulos de sección más grandes */
+            margin-bottom: 40px; /* Más espacio debajo del título */
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px; /* Más abajo */
+            transform: translateX(-50%);
+            width: 80px; /* Más ancha */
+            height: 4px; /* Más gruesa */
+            background-color: var(--color-gold);
+            border-radius: 5px;
+            box-shadow: 0 0 10px var(--color-gold); /* Brillo sutil */
+        }
+
+        #intro {
+            background: transparent; /* Sin fondo propio, usará el del body/wrapper */
+            color: var(--color-text-light);
+            padding: 80px 0; /* Más padding */
+            border-radius: 0;
+            box-shadow: none; /* Sin sombra para esta sección especial */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - 100px); /* Que ocupe casi toda la pantalla inicial (menos el header aprox) */
+            /* Ya no hay video local aquí, por lo que no se necesitan estilos para #intro video */
+            margin-top: 0; /* Quitar margen superior para que pegue con el header si es el primer elemento */
+            margin-bottom: 30px; /* Mantener un margen inferior */
+            background-color: rgba(0,0,0,0.5); /* Fondo oscuro semi-transparente para mejor legibilidad */
+        }
+
+        #intro .intro-content {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(10, 10, 10, 0.6); /* Fondo más sutil para el texto */
+            padding: 30px 40px; /* Más padding */
+            border-radius: 15px; /* Bordes más redondeados */
+            max-width: 900px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        #intro .intro-content h2 {
+            color: var(--color-gold);
+            margin-bottom: 20px;
+            font-size: 2.8em; /* Más grande */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        #intro .intro-content h2::after {
+            background-color: var(--color-gold);
+            box-shadow: 0 0 8px var(--color-gold);
+        }
+
+        #intro .intro-content p {
+            font-size: 1.3em; /* Más grande */
+            max-width: 750px;
+            margin: 15px auto 0;
+            line-height: 1.7;
+        }
+
+        #bio img {
+            max-width: 380px; /* Ligeramente ajustado */
+            border-radius: 50%; /* Imagen de perfil circular */
+            border: 10px solid var(--color-gold);
+            margin-bottom: 30px;
+            object-fit: cover;
+            width: 300px; /* Asegurar tamaño para forma circular */
+            height: 300px; /* Asegurar tamaño para forma circular */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5), 0 0 15px rgba(0,0,0,0.5); /* Doble sombra */
+            transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease;
+        }
+        #bio img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.7), 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        /* Ya no hay .video-container en #bio, ni #bio video */
+
+        #musica ul {
+            list-style: none; /* Quitar viñetas por defecto */
+            padding-left: 0;
+            text-align: left;
+            max-width: 700px; /* Limitar ancho de listas */
+            margin: 20px auto; /* Centrar listas */
+        }
+
+        #musica li {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            padding-left: 25px; /* Espacio para el icono personalizado */
+            position: relative;
+        }
+        #musica li::before { /* Icono personalizado para items de lista */
+            content: '🎵'; /* O cualquier otro emoji o icono SVG/FontAwesome */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--color-gold);
+            font-size: 1.2em;
+        }
+
+        #musica h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-dark);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        /* Estilos para el contenedor del video de YouTube */
+        .youtube-video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporción 16:9 */
+            padding-top: 30px; /* Espacio opcional arriba */
+            height: 0;
+            overflow: hidden;
+            max-width: 700px; /* Ancho máximo del video */
+            margin: 30px auto; /* Centrar el contenedor */
+            border-radius: 12px; /* Bordes redondeados para el contenedor */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .youtube-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0; /* Quitar borde del iframe */
+        }
+
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajuste minmax */
+            gap: 20px; /* Más espaciado */
+            text-align: left;
+        }
+
+        .gallery-grid img {
+            display: block;
+            width: 100%;
+            height: 220px; /* Ligeramente más alto */
+            object-fit: cover;
+            border-radius: 10px; /* Bordes más suaves */
+            border: 3px solid transparent; /* Borde inicial transparente */
+            transition: transform var(--transition-speed) ease-in-out,
+                        border-color var(--transition-speed) ease-in-out,
+                        box-shadow var(--transition-speed) ease-in-out,
+                        filter var(--transition-speed) ease;
+            cursor: pointer;
+            filter: saturate(0.8) brightness(0.95); /* Ligeramente desaturado y oscuro */
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.08) rotate(-1deg); /* Efecto más pronunciado */
+            border-color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            filter: saturate(1.2) brightness(1.05); /* Más saturado y brillante al pasar el mouse */
+        }
+
+        #contacto p {
+            margin-bottom: 15px;
+        }
+        #contacto p a {
+            color: var(--color-primary); /* Color oscuro por defecto */
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 8px; /* Pequeño padding para mejor click */
+            border-radius: 5px;
+            transition: color var(--transition-speed) ease-in-out, background-color var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease;
+        }
+
+        #contacto p a:hover {
+            color: var(--color-dark); /* Texto oscuro sobre fondo dorado */
+            background-color: var(--color-gold);
+            box-shadow: 0 0 10px var(--color-gold);
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 40px 0; /* Más padding */
+            background: var(--color-dark);
+            color: var(--color-text-light);
+            margin-top: 50px; /* Más margen superior */
+            border-top: 3px solid var(--color-gold); /* Línea dorada en la parte superior del footer */
+        }
+
+        footer p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.85); /* Texto un poco más opaco */
+            font-size: 0.95em;
+        }
+
+        /* Botón para volver arriba (opcional) */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-gold);
+            color: var(--color-dark);
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: var(--transition-speed);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background-color: #e0bd00; /* Dorado más oscuro al pasar el mouse */
+            transform: scale(1.1);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+
+        <header>
+            <div class="container">
+                <h1>Peso Pluma</h1>
+                <p>La Doble P y su impacto global en la música mexicana</p>
+                <nav>
+                    <ul>
+                        <li><a href="#intro">Inicio</a></li>
+                        <li><a href="#bio">Biografía</a></li>
+                        <li><a href="#musica">Música</a></li>
+                        <li><a href="#gallery">Galería</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section id="intro">
+            <div class="intro-content">
+                <h2>Bienvenido a la Página Oficial de Fans</h2>
+                <p>Sumérgete en el mundo de Hassan Emilio Kabande Laija, la voz detrás de Peso Pluma, el líder de una nueva ola que está rompiendo récords y fronteras con los Corridos Tumbados.</p>
+            </div>
+        </section>
+
+        <section id="bio">
+            <div class="container">
+                <h2>Biografía</h2>
+                <img src="portada.png" alt="Imagen de perfil de Peso Pluma">
+                <p>Nacido el 15 de junio de 1999 en Zapopan, Jalisco, México, Peso Pluma no es solo un cantante; es un fenómeno cultural. Su sonido innovador mezcla las raíces del corrido con la energía del trap y el hip-hop, creando un estilo que resuena con millones.</p>
+                <p>Desde sus inicios en la música, influenciado por géneros tan diversos como el reggaetón, el rock y el regional mexicano tradicional, Hassan buscó una identidad propia. Su perseverancia lo llevó a firmar con sellos importantes y a lanzar temas que rápidamente se volvieron virales.</p>
+                <p>Su humildad, autenticidad y la forma en que conecta con su audiencia lo han convertido en uno de los artistas más influyentes y comentados de la actualidad, llevando la música mexicana a escenarios internacionales nunca antes vistos.</p>
+            </div>
+        </section>
+
+        <section id="musica">
+            <div class="container">
+                <h2>Su Música</h2>
+                <p>Los Corridos Tumbados de Peso Pluma se caracterizan por letras directas que reflejan la vida moderna, acompañadas de la instrumentación tradicional del corrido (guitarras, bajo) con una producción más pulida y ritmos contagiosos.</p>
+                <p>Es un pionero en colaborar con artistas de distintos géneros y nacionalidades, demostrando la versatilidad y el alcance global de su propuesta.</p>
+
+                <h3>Video Destacado</h3>
+                <div class="youtube-video-container">
+                    <iframe
+                        src="https://www.youtube.com/watch?v=nQvDENPiBWU"
+                        title="Video de YouTube de Peso Pluma"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+
+                <h3>Éxitos Imperdibles:</h3>
+                <ul>
+                    <li>Ella Baila Sola (feat. Eslabon Armado)</li>
+                    <li>La Bebé (Remix feat. Yng Lvcas)</li>
+                    <li>PRC (feat. Natanael Cano)</li>
+                    <li>AMG (feat. Natanael Cano & Gabito Ballesteros)</li>
+                    <li>Lady Gaga (feat. Gabito Ballesteros & Junior H)</li>
+                    <li>TULUM (feat. Grupo Frontera)</li>
+                    <li>Qlona (feat. Karol G)</li>
+                </ul>
+                <h3>Discografía Clave:</h3>
+                <ul>
+                    <li>Ah y Qué? (2020)</li>
+                    <li>Efectos Secundarios (2021)</li>
+                    <li>Génesis (2023) - Un álbum que marcó un antes y un después.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h2>Galería</h2>
+                <p>Momentos capturados de presentaciones, eventos y más.</p>
+                <div class="gallery-grid">
+                    <img src="1.png" alt="Peso Pluma en vivo 1">
+                    <img src="2.png" alt="Peso Pluma posando 2">
+                    <img src="3.png" alt="Peso Pluma en estudio 3">
+                    <img src="4.png" alt="Peso Pluma selfie 4">
+                    <img src="5.png" alt="Peso Pluma en concierto 5">
+                    <img src="6.png" alt="Peso Pluma backstage 6">
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <h2>Contacto y Redes Sociales</h2>
+                <p>Conecta directamente con Peso Pluma y su equipo a través de sus plataformas oficiales:</p>
+                <p>
+                    <a href="https://www.instagram.com/pesopluma/" target="_blank">Instagram Oficial</a> |
+                    <a href="https://twitter.com/ElPesoPluma" target="_blank">Twitter Oficial</a> |
+                    <a href="https://www.youtube.com/@PesoPlumaOfficial" target="_blank">YouTube Oficial</a> |
+                    <a href="https://open.spotify.com/artist/1ExLeraNTUKgFUycR3zgzF?si=" target="_blank">Spotify</a> |
+                    <a href="#" target="_blank">Facebook Oficial (si tiene)</a>
+                </p>
+            </div>
+        </section>
+
+    </div> {/* Fin de .content-wrapper */}
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Página de Fans de Peso Pluma. Todos los derechos reservados (simulado).</p>
+            <p>Hecho con admiración por un fan.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" title="Volver arriba">&#8679;</a>
+
+    <script>
+        // Script para el año actual en el footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Script para animaciones de secciones al hacer scroll
+        const sections = document.querySelectorAll('section');
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% de la sección visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // observer.unobserve(entry.target); // Descomentar si solo quieres que la animación ocurra una vez
+                } else {
+                    // entry.target.classList.remove('visible'); // Descomentar si quieres que la animación se repita al salir y entrar
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Script para mostrar/ocultar botón "Volver Arriba"
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Muestra el botón después de scrollear 300px
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+    </script>
+
+</body>
+</html>
